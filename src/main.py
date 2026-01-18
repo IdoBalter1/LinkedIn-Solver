@@ -50,7 +50,7 @@ from inTime import BoardGrabber
 
 
 if __name__ == '__main__':
-
+    AUTOCLICK = True
     grabber = BoardGrabber()
     t,l,w,h = grabber.get_monitor_properties(1)
     max_attempts = 400
@@ -114,7 +114,8 @@ if __name__ == '__main__':
     # parser.add_argument('-o', '--opacity', type=int, default=50,
     #                     help='opacity (percent: default 50)')
     # args = parser.parse_args(sys.argv[1:])
-    complete_board(centers)
+    if AUTOCLICK:
+        complete_board(centers)
     app = QApplication(sys.argv)
     window = TransWin(temp_path,
                       position=[int(topleftg[0]),int(topleftg[1])], opacity=50)
