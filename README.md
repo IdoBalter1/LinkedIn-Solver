@@ -148,9 +148,6 @@ LinkedIn-Solver/
 - Grid detection may need parameter tuning for different board styles
 - The overlay window stays on top and allows normal screen interaction
 
-## License
-
-This project is for educational purposes.
 
 
 
