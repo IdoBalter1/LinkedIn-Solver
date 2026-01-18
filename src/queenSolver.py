@@ -1,3 +1,5 @@
+import win32api, win32con
+import time
 def gridRegionsToGroupSets(grid_regions):
     """
     Group sets are in the form (column,row)... -> colour
@@ -44,3 +46,14 @@ def solve(group_sets):
         result = solve(new_group_sets)
         if result is not None:
             return [(tx, ty)] + result
+
+def complete_board(coords):
+    for (x,y) in coords:
+        # If you want to slow down the clicks, adjust the sleep duration below
+        time.sleep(0.25)
+        win32api.SetCursorPos((x,y))
+        win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN,0,0,0,0)
+        win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP,0,0,0,0)
+        win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN,0,0,0,0)
+        win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP,0,0,0,0)
+    

@@ -71,11 +71,15 @@ def plotColouredGrid(zoomed,grid_regions,colored_grid):
     #cv.destroyAllWindows()
 
 def answer_to_grid(answer, coords, img, color=(0, 0, 255), radius=15, thickness=3):
+    centers = []
     for (i, j) in answer:
         x, y = coords[j][i]
         center = (int(x), int(y))
+        centers.append(center)
         cv.circle(img, center, radius, color, thickness)
-    return img
+    return img,centers
+
+
 
 
         

@@ -3,7 +3,7 @@ import numpy as np
 from pathlib import Path
 import matplotlib.pyplot as plt
 import time
-
+import win32api, win32con
 from PyQt5.QtCore import QPoint, Qt
 from PyQt5.QtGui import QPainter, QPen, QPixmap
 from PyQt5.QtWidgets import QApplication, QMainWindow
@@ -15,6 +15,8 @@ import argparse
 from PyQt5 import QtCore, QtGui, QtWidgets
 import signal
 import sys
+
+
 from utils import (
     line_intersection,
     get_valid_lines,
@@ -31,7 +33,8 @@ from utils import (
 
 from queenSolver import(
     gridRegionsToGroupSets,
-    solve
+    solve,
+    complete_board
 ) 
 
 from boardDetector import(
@@ -86,7 +89,7 @@ if __name__ == '__main__':
 
     answer = solve(group_sets)
 
-    answer_to_grid(answer,coords,img)
+    _, centers =answer_to_grid(answer,coords,img)
     temp_path = 'solution_overlay.png'
     cv.imwrite(temp_path,zoomed)
 
@@ -111,7 +114,7 @@ if __name__ == '__main__':
     # parser.add_argument('-o', '--opacity', type=int, default=50,
     #                     help='opacity (percent: default 50)')
     # args = parser.parse_args(sys.argv[1:])
-
+    complete_board(centers)
     app = QApplication(sys.argv)
     window = TransWin(temp_path,
                       position=[int(topleftg[0]),int(topleftg[1])], opacity=50)
@@ -120,6 +123,8 @@ if __name__ == '__main__':
     if os.path.exists(temp_path):
         os.remove(temp_path)
     sys.exit(app.exec_())
+
+    
     
 
 
